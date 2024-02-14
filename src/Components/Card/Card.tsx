@@ -29,15 +29,8 @@ function Card({data}: OptionsProps): JSX.Element {
         }
     })
     
-    // const handleDrop = (event: DropEvent) => {
-    //     const {active, over} = event;
-
-    //     if (destination) {
-    //         const {droppableId, index} = destination
-    //     }
-
-    //     console.log(`Soltado en droppableId: ${droppableId}, index: ${index}`);
-    // };
+    // 
+    
 
 
     return (
