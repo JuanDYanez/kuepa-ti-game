@@ -22,7 +22,7 @@ function Card({data}: OptionsProps): JSX.Element {
             type: 'ageDroppable'
         }
     })
-    const {setNodeRef: nationalityDroppable, isOver: isOverNationality} = useDroppable({
+    const {setNodeRef: nationalityDroppable} = useDroppable({
         id: 'nationalityDroppable',
         data: {
             type: 'nationalityDroppable'
