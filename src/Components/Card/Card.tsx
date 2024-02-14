@@ -49,13 +49,9 @@ function Card({data}: OptionsProps): JSX.Element {
                     <strong>Apellidos:</strong>
                     <div className='content-info-item'>{data.surname}</div>
                     <strong>Edad:</strong>
-                    {isOverAge ? (
-                        <div ref={ageDroppable} onDrop={handleDrop} className='content-info-item'>{isOverAge && data.age}</div>
-                    ) : null}
+                    <div ref={ageDroppable} className='content-info-item'>{isOverAge && data.age}</div>
                     <strong>Nacionalidad:</strong>
-                    {isOverNationality ? (
-                        <div ref={nationalityDroppable} onDrop={handleDrop} className='content-info-item'>{data.nationality}</div>
-                    ) : null}
+                    <div ref={nationalityDroppable} className='content-info-item'>{data.nationality}</div>
                 </div>
             </div>
         </div>

@@ -1,4 +1,3 @@
-import { NavLink } from "react-router-dom";
 import {useState, useEffect} from 'react'
 import Card from '../Card/Card'
 import Options from '../Options/Options'
@@ -7,7 +6,7 @@ import {DndContext } from '@dnd-kit/core'
 
 import './Board.styles.css'
 
-function Board(): JSX.Element {
+function Board2(): JSX.Element {
 
     interface Data {
         forename: string,
@@ -26,8 +25,6 @@ function Board(): JSX.Element {
         picture: '',
         color: ''
     })
-
-    
 
     // type DNDType = {
     //     id:UniqueIdentifier;
@@ -153,21 +150,18 @@ function Board(): JSX.Element {
 
     // }
 
-
     return (
     <DndContext>
         <div className="board-container">
-            <h1>Nivel 1</h1>
+            <h1>Nivel 2</h1>
             <div className='board-content'>
                 <Card data={randomData}/>
                 <Options data={randomData} onRandomColor={getRandomColor}/>
             </div>
-            <NavLink exact to="/2">
-                <button className='content-button'>Siguiente</button>
-            </NavLink>
+            <button className='content-button'>Siguiente</button>
         </div>
     </DndContext>
     )
 }
 
-export default Board;
+export default Board2;

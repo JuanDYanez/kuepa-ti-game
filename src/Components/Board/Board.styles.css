@@ -85,3 +85,8 @@ margin-left: 10px;
   .content-info strong {
     margin-right: 5px;
   }
+
+  .content-button {
+    color: white;
+    background-color: #FB5118;;
+  }
