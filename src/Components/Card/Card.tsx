@@ -1,4 +1,5 @@
-import { Droppable } from 'react-beautiful-dnd'
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useDroppable } from '@dnd-kit/core';
 
 import './Card.styles.css'
 
@@ -14,6 +15,31 @@ interface OptionsProps {
 }
 
 function Card({data}: OptionsProps): JSX.Element {
+
+    const {setNodeRef: ageDroppable, isOver: isOverAge} = useDroppable({
+        id: 'ageDroppable',
+        data: {
+            type: 'ageDroppable'
+        }
+    })
+    const {setNodeRef: nationalityDroppable, isOver: isOverNationality} = useDroppable({
+        id: 'nationalityDroppable',
+        data: {
+            type: 'nationalityDroppable'
+        }
+    })
+    
+    // const handleDrop = (event: DropEvent) => {
+    //     const {active, over} = event;
+
+    //     if (destination) {
+    //         const {droppableId, index} = destination
+    //     }
+
+    //     console.log(`Soltado en droppableId: ${droppableId}, index: ${index}`);
+    // };
+
+
     return (
         <div className="card-container">
             <div className="header">
@@ -26,21 +52,17 @@ function Card({data}: OptionsProps): JSX.Element {
                 </div>
                 <div className="content-info">
                     <strong>Nombres:</strong>
-                    <p>{data.forename}</p>
+                    <div className='content-info-item'>{data.forename}</div>
                     <strong>Apellidos:</strong>
-                    <p>{data.surname}</p>
+                    <div className='content-info-item'>{data.surname}</div>
                     <strong>Edad:</strong>
-                    <Droppable droppableId="age">                        
-                        {(droppableProvided) => (
-                        <p 
-                            {...droppableProvided.droppableProps}
-                            ref={droppableProvided.innerRef}
-                        >{data.age}{droppableProvided.placeholder}</p>)}
-                    </Droppable>
+                    {isOverAge ? (
+                        <div ref={ageDroppable} onDrop={handleDrop} className='content-info-item'>{isOverAge && data.age}</div>
+                    ) : null}
                     <strong>Nacionalidad:</strong>
-                    <Droppable droppableId="nationality">
-                        <p>{data.nationality}</p>
-                    </Droppable>
+                    {isOverNationality ? (
+                        <div ref={nationalityDroppable} onDrop={handleDrop} className='content-info-item'>{data.nationality}</div>
+                    ) : null}
                 </div>
             </div>
         </div>

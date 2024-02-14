@@ -1,4 +1,6 @@
-import { Draggable} from 'react-beautiful-dnd'
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useDraggable } from '@dnd-kit/core';
+import { CSS } from '@dnd-kit/utilities';
 
 import './Options.styles.css'
 
@@ -14,26 +16,52 @@ interface OptionsProps {
     onRandomColor: () => string
 }
 
+interface DraggableOptionProps {
+    option: { id: string, content: string | number };
+    onRandomColor: () => string;
+}
+
+function DraggableOption({ option, onRandomColor }: DraggableOptionProps): JSX.Element {
+    const {attributes, listeners, setNodeRef, transform} = useDraggable({
+        id: option.id,
+    });
+
+    const draggableStyle = {
+        transform: CSS.Translate.toString(transform),
+        backgroundColor: onRandomColor(),
+    };
+
+    return (
+        <div
+            ref={setNodeRef}
+            {...listeners}
+            {...attributes}
+            style={draggableStyle}
+            className="option"
+        >
+            {option.content}
+        </div>
+    );
+}
+
 function Options({data, onRandomColor}: OptionsProps): JSX.Element {
+    
+    const options = [
+        { id: 'age', content: data.age },
+        { id: 'nationality', content: data.nationality },
+    ]
+
+    const colors = {
+        age: onRandomColor(),
+        nationality: onRandomColor(),
+    };
 
     return (
         <div className="options-container">
             <h1 className='options-title'>Opciones</h1>
-            <Draggable draggableId="" index="">
-                {(draggableProvided) => (
-                <div
-                    {...draggableProvided.draggableProps}
-                    ref={draggableProvided.innerRef}
-                    {...draggableProvided.dragHandleProps}
-                    className="option"
-                    style={{backgroundColor: onRandomColor()}}
-                >
-                    {data.age}
-                </div>)}
-            </Draggable>
-            <Draggable>
-                <div className="option" style={{backgroundColor: onRandomColor()}}>{data.nationality}</div>
-            </Draggable>
+                {options.map(option => (
+                    <DraggableOption key={option.id} option={option} onRandomColor={() => colors[option.id]}/>
+                ))}
         </div>
     )
 }
